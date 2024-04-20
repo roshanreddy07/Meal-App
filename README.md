@@ -19,5 +19,6 @@ This is a simple web application for searching, viewing, and favoriting meals. U
 
 1. Clone the repository:
 
+
 ```bash
 git clone https://github.com/roshanreddy07/meal-app.git
