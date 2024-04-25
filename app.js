@@ -96,21 +96,27 @@ function renderSearchedMeals(meals) {
         searchResultsList.appendChild(li);
     });
 }
-
+let timeoutId;
 // Event listener for search input
 const mealSearch = document.getElementById('meal-search');
 mealSearch.addEventListener('input', async (e) => {
-    const query = e.target.value.trim();
-
-    if (query.length > 0) {
-        const meals = await searchMeals(query);
-        renderSearchedMeals(meals);
-        // console.log(query, 'working ');
-    } else {
-        const searchResultsList = document.getElementById('searchResults');
-        searchResultsList.innerHTML = '';
-    }
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(async () => {
+        const query = e.target.value.trim();
+        // console.log(query);
+        if (query.length > 0) {
+            const meals = await searchMeals(query);
+            renderSearchedMeals(meals);
+            // console.log(query, 'working 1');
+        } else {
+            // console.log(query, 'working 2');
+            const searchResultsList = document.getElementById('searchResults');
+            searchResultsList.innerHTML = '';
+        }
+    }, 500)
 });
+
+
 
 //this fn  viewMealDetails is called when a searched result is clicked, it will show more details of that  particular meal in modal window
 async function viewMealDetails(mealId) {
